@@ -1,0 +1,25 @@
+.dominoPiece{
+    background-color: aliceblue;
+    width: 40px;
+    height: 70px;
+    border-radius: 20%;
+
+}
+
+.visible {
+  visibility: visible;
+}
+
+.dot{
+    margin: 2px;
+	border-radius: 50%;
+	width: 6px;
+	height: 6px;ss
+	background-color: black;
+}
+.upSection{
+    margin: 2px;
+}
+.buttomSection{
+    margin: 2px;
+}

@@ -1,0 +1,21 @@
+
+.board {
+    background:rgb(72, 72, 148);
+    position: absolute; 
+    width: 60%;
+    height: 90%;
+    margin-top: 2%;
+    margin-left: 20%;
+  }
+  
+.board:after {
+    content: "";
+    display: block;
+    padding-bottom: 100%;
+}
+  
+.content {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
