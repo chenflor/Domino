@@ -12,6 +12,7 @@ import dominoPieceTheme from "./dominoPieceTheme.css";
     return (
       <div className = "dominoPiece">
         <table className = "upSection">
+        <tbody>
             <tr className="row">
               <th className="dot"> </th>
               <th className="dot"></th>
@@ -27,8 +28,10 @@ import dominoPieceTheme from "./dominoPieceTheme.css";
               <th className="dot"></th>
               <th className="dot"></th>
             </tr>
+            </tbody>
           </table>
           <table className = "buttomSection">
+          <tbody>
             <tr className="row">
               <th className="dot"> </th>
               <th className="dot"></th>
@@ -44,6 +47,7 @@ import dominoPieceTheme from "./dominoPieceTheme.css";
               <th className="dot"></th>
               <th className="dot"></th>
             </tr>
+            </tbody>
           </table>
         </div>
     );
