@@ -5,26 +5,26 @@ import * as math from 'mathjs'
 
 class DominoCash extends Component {
 
+  initDominoCashArray(){
+    //Initializing a 28 pieces domino array.
+    let index = 0;
+    for(var i=0; i<=6;i++){
+      for(var j = i;j<=6;j++){
+        this.dominosCashArray[index] = new DominoPiece(i,j);
+        index +=1;
+        if(index > this.length){
+          console.log("There is a bug in the code - too many pieces are initialized");
+          return;
+        }
+      }
+    }
+  }
+
     constructor() {
       super();
       this.length = 28;
       this.dominosCashArray = [];
-        var index = 0;
-        var i = 0;
-        var j = 0;
-        while(index <= this.length){
-            this.dominosCashArray[index] = new DominoPiece(i,j);
-          if(j == 6){
-              j = i;
-              i = i + 1;
-          }
-          j = j + 1;
-          index = index + 1;
-        }
-     // console.log(this.dominosCashArray);
-    //   this.state = {
-    //     dominosCash: dominosCashArray
-    //   };
+      this.initDominoCashArray(); 
     }
 
     getARandomDomino(){
@@ -43,7 +43,6 @@ class DominoCash extends Component {
         }
         this.dominosCashArray = tempArray;
         this.length = this.length - 1;
-        //console.log(this.dominosCashArray);
         return ans;
     }
 
@@ -52,12 +51,12 @@ class DominoCash extends Component {
         for(var i = 0; i< 6 ;i++){
             newSixDominos[i] = this.getARandomDomino();
         }
-        //console.log(newSixDominos);
-        this.props.parentSixDominos(newSixDominos);
-        return newSixDominos;
+        console.log(newSixDominos);
+        this.props.changeDominos(newSixDominos);
     }
 
     render() {
+      console.log("dominoCash renderer");
       return (
         <div className = "dominoCash">
             <button onClick={this.newGame.bind(this)}>New Game</button>
