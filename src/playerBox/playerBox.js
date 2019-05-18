@@ -15,14 +15,19 @@ class PlayerBox extends Component {
 
     changeDominos(dominos){
       console.log("Change Doimnos called");
-      this.setState({dominos})
+      console.log("Change Doimnos called");
+      this.setState({dominos : dominos});
     }
     
     displayDominos(){
+      
       console.log("Display Doimnos called");
-
-      if (Array.isArray(this.dominos)){
-        const displayedDominos = this.dominos.map(domino => <div>{domino}</div>);
+      console.log(this.state.dominos);
+      if (Array.isArray(this.state.dominos)){
+        console.log("is an Araay");
+        const displayedDominos = this.state.dominos.map(
+          domino =>
+          (<div key={domino.firstNum.toString() + domino.secondNum.toString()}>{domino.render()}</div>));
         return (
         <React.Fragment>
           {displayedDominos}
@@ -40,7 +45,6 @@ class PlayerBox extends Component {
       return (
         <div className = "playerBox">
             {/* <h2 classNameName = "playersTitle">Player's Box</h2> */}
-            <DominoPiece/> 
             <DominoCash changeDominos={this.changeDominos.bind(this)}/> 
             {this.displayDominos()}
         </div>

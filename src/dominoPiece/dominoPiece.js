@@ -9,6 +9,7 @@ import dominoPieceTheme from "./dominoPieceTheme.css";
     
   }
   render() {
+    console.log("Domino Piece Render");
     return (
       <div className = "dominoPiece">
         <table className = "upSection">
