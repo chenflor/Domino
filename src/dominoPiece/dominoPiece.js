@@ -2,11 +2,11 @@ import React, { Component } from "react";
 import dominoPieceTheme from "./dominoPieceTheme.css";
 
   class DominoPiece extends Component {
-  constructor() {
+  constructor(firstNum,secondNum) {
     super();
-    this.state = {
-      title: ""
-    };
+    this.firstNum = firstNum;
+    this.secondNum = secondNum;
+    
   }
   render() {
     return (
