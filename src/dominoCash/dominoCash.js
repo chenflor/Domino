@@ -21,7 +21,7 @@ class DominoCash extends Component {
           j = j + 1;
           index = index + 1;
         }
-      console.log(this.dominosCashArray);
+     // console.log(this.dominosCashArray);
     //   this.state = {
     //     dominosCash: dominosCashArray
     //   };
@@ -43,7 +43,7 @@ class DominoCash extends Component {
         }
         this.dominosCashArray = tempArray;
         this.length = this.length - 1;
-        console.log(this.dominosCashArray);
+        //console.log(this.dominosCashArray);
         return ans;
     }
 
@@ -52,7 +52,8 @@ class DominoCash extends Component {
         for(var i = 0; i< 6 ;i++){
             newSixDominos[i] = this.getARandomDomino();
         }
-        console.log(newSixDominos);
+        //console.log(newSixDominos);
+        this.props.parentSixDominos(newSixDominos);
         return newSixDominos;
     }
 

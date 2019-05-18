@@ -10,12 +10,17 @@ class PlayerBox extends Component {
         title: ""
       };
     }
+
+    playerFirstSixDominos = (firstSixDominos) => {
+      console.log(firstSixDominos);
+    }
+
     render() {
       return (
         <div className = "playerBox">
             {/* <h2 classNameName = "playersTitle">Player's Box</h2> */}
             <DominoPiece/> 
-            <DominoCash/>
+            <DominoCash parentSixDominos={this.playerFirstSixDominos}/>
         </div>
       );
     }
