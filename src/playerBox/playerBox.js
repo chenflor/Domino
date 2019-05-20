@@ -46,7 +46,8 @@ class PlayerBox extends Component {
         <div className = "playerBox">
             {/* <h2 classNameName = "playersTitle">Player's Box</h2> */}
             <DominoCash changeDominos={this.changeDominos.bind(this)}/> 
-            {this.displayDominos()}
+            <div className = "myDominos">{this.displayDominos()}</div>
+            
         </div>
       );
     }
