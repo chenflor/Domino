@@ -37,7 +37,9 @@ class PlayerBox extends Component {
         console.log("is an Araay");
         const displayedDominos = this.state.dominos.map(
           domino =>
-          (<div key={domino.firstNum.toString() + domino.secondNum.toString()}>{domino.render()}</div>));
+          (<div key={domino.firstNum.toString() + domino.secondNum.toString()}>
+            <DominoPiece firstNum = {domino.firstNum} secondNum = {domino.secondNum} />
+          </div>));
         return (
         <React.Fragment>
           {displayedDominos}
