@@ -3,16 +3,26 @@ import cellInBoardTheme from "./cellInBoardTheme.css";
 
 
 class CellInBoard extends Component {
-  constructor(i,j) {
+  constructor(row,coulmn) {
     super();
-    this.i = 28;
-    this.j = 28;
+    this.row = row;
+    this.coulmn = coulmn;
     this.state = {
+      isHorizontal : true,
+      Domino : null
     };
   }
+  
+  AddDominoToBoard(newDomino){
+    this.setState({Domino : newDomino})
+  }
 
+  change
 
   render() {
+    if (this.state.Domino != null){
+      <Domino/>
+    }
     return (
       <div className = "cellInBoard">
       </div>
