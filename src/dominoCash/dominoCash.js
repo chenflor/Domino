@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-//import playerBoxTheme from "./playerBoxTheme.css";
+import dominoCashTheme from "./dominoCashTheme.css";
 import DominoPiece from "../dominoPiece/dominoPiece";
 import * as math from 'mathjs'
 
@@ -28,7 +28,7 @@ class DominoCash extends Component {
     }
 
     getARandomDomino(){
-        var max = this.length;
+        var max = this.length-1;
         var min = 0;
         var index = math.floor(Math.random()*(max-min+1)+min);
         var ans = this.dominosCashArray[index];
@@ -55,11 +55,17 @@ class DominoCash extends Component {
         this.props.changeDominos(newSixDominos);
     }
 
+    getNewDominoFromCash(){
+      var newDomino = this.getARandomDomino();
+      this.props.getNewDominoFromCash(newDomino);
+    }
+
     render() {
       console.log("dominoCash renderer");
       return (
         <div className = "dominoCash">
             <button onClick={this.newGame.bind(this)}>New Game</button>
+            <button onClick={this.getNewDominoFromCash.bind(this)}>New Domino</button>
         </div>
       );
     }
