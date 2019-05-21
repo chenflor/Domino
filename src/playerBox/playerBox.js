@@ -18,9 +18,19 @@ class PlayerBox extends Component {
       console.log("Change Doimnos called");
       this.setState({dominos : dominos});
     }
+
+    getNewDominoFromCash(newDomino){
+      console.log("in get new domino");
+      for(var i=0;i<this.state.dominos.length;i++){
+        if(!this.state.dominos[i]){
+          this.state.dominos[i] = newDomino;
+          console.log(this.state.dominos[i]);
+          break;
+        }
+      }
+    }
     
     displayDominos(){
-      
       console.log("Display Doimnos called");
       console.log(this.state.dominos);
       if (Array.isArray(this.state.dominos)){
@@ -45,7 +55,7 @@ class PlayerBox extends Component {
       return (
         <div className = "playerBox">
             {/* <h2 classNameName = "playersTitle">Player's Box</h2> */}
-            <DominoCash changeDominos={this.changeDominos.bind(this)}/> 
+            <DominoCash changeDominos={this.changeDominos.bind(this)} getNewDominoFromCash={this.getNewDominoFromCash.bind(this)} /> 
             <div className = "myDominos">{this.displayDominos()}</div>
             
         </div>

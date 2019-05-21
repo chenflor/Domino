@@ -55,11 +55,17 @@ class DominoCash extends Component {
         this.props.changeDominos(newSixDominos);
     }
 
+    getNewDominoFromCash(){
+      var newDomino = this.getARandomDomino();
+      this.props.getNewDominoFromCash(newDomino);
+    }
+
     render() {
       console.log("dominoCash renderer");
       return (
         <div className = "dominoCash">
             <button onClick={this.newGame.bind(this)}>New Game</button>
+            <button onClick={this.getNewDominoFromCash.bind(this)}>New Domino</button>
         </div>
       );
     }
