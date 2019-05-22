@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import dominoBoardTheme from "./dominoBoardTheme.css";
 import PlayerBox from "../playerBox/PlayerBox.js"
 import CellInBoard from "../cellInBoard/cellInBoard.js"
+import Statistics from '../statistics/statistics.js';
 
 class DominoBoard extends Component {
   constructor() {
@@ -32,6 +33,7 @@ class DominoBoard extends Component {
         {this.state.dominosBoard.map((row) => 
           row.map((cell) => cell.render()))} </div>
         <PlayerBox/> 
+        <Statistics/>
       </div>
     );
   }

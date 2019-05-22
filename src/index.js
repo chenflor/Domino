@@ -3,9 +3,11 @@ import ReactDOM from 'react-dom';
 
 import DominoBoard from './dominoBoard/dominoBoard.jsx';
 
+
 const App = () => (
     <div>
         <DominoBoard/>  
+        
     </div>
 );
 
