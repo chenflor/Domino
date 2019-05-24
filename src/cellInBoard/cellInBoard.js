@@ -1,12 +1,11 @@
 import React, { Component } from "react";
 import cellInBoardTheme from "./cellInBoardTheme.css";
+import DominoPiece from "../dominoPiece/dominoPiece";
 
 
 class CellInBoard extends Component {
-  constructor(row,coulmn) {
-    super();
-    this.row = row;
-    this.coulmn = coulmn;
+  constructor(props) {
+    super(props);
     this.state = {
       isHorizontal : true,
       Domino : null
@@ -20,11 +19,13 @@ class CellInBoard extends Component {
   change
 
   render() {
+    const DOMINO = null;
     if (this.state.Domino != null){
-      <Domino/>
+      DOMINO = <DominoPiece firstNum = {this.state.Domino.firstNum} secondNum = {this.state.Domino.secondNum} isHorizontal = {this.state.isHorizontal}/>
     }
     return (
       <div className = "cellInBoard">
+        {DOMINO}
       </div>
     );
   }
