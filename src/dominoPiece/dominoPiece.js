@@ -39,6 +39,8 @@ import dominoPieceTheme from "./dominoPieceTheme.css";
 
   render() {
     console.log("Domino Piece Render");
+    console.log("FirstNum:" + this.props.firstNum);
+    console.log("Second Num:" + this.props.secondNum);
     return (
       <div className = "dominoPiece">
         <table className = "upSection">
@@ -54,7 +56,7 @@ import dominoPieceTheme from "./dominoPieceTheme.css";
               <th className={this.setDominoNumbers(6,this.props.firstNum)}></th>
             </tr>
             <tr className="row">
-              <th className={this.setDominoNumbers(7,this.props.firstNum}></th>
+              <th className={this.setDominoNumbers(7,this.props.firstNum)}></th>
               <th className={this.setDominoNumbers(8,this.props.firstNum)}></th>
               <th className={this.setDominoNumbers(9,this.props.firstNum)}></th>
             </tr>

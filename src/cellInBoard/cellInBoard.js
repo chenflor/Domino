@@ -16,8 +16,6 @@ class CellInBoard extends Component {
     this.setState({Domino : newDomino})
   }
 
-  change
-
   render() {
     const DOMINO = null;
     if (this.state.Domino != null){

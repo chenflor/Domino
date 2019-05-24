@@ -3,28 +3,31 @@ import dominoCashTheme from "./dominoCashTheme.css";
 import DominoPiece from "../dominoPiece/dominoPiece";
 import * as math from 'mathjs'
 
+
 class DominoCash extends Component {
 
   initDominoCashArray(){
     //Initializing a 28 pieces domino array.
+    let ansArray =[]
     let index = 0;
     for(var i=0; i<=6;i++){
       for(var j = i;j<=6;j++){
-        this.dominosCashArray[index] = new DominoPiece(i,j);
-        index +=1;
+        ansArray[index] = {firstNum : i, secondNum : j};
+        index++;
         if(index > this.length){
-          console.log("There is a bug in the code - too many pieces are initialized");
-          return;
+          console.error("There is a bug in the code - too many pieces are initialized");
+          return null;
         }
       }
     }
+    return ansArray;
   }
 
-    constructor() {
-      super();
+    constructor(props) {
+      super(props);
       this.length = 28;
-      this.dominosCashArray = [];
-      this.initDominoCashArray(); 
+      this.dominosCashArray = this.initDominoCashArray()
+      
     }
 
     getARandomDomino(){
