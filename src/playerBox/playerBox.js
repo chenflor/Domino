@@ -9,19 +9,25 @@ class PlayerBox extends Component {
       super();
       console.log("HELLO");
       this.state = {
-        dominos : []
+        playerDominos : []
       };
     }
 
     changeDominos(dominos){
       console.log("Change Doimnos called");
 
-      this.setState({dominos : dominos});
+      this.setState({playerDominos : dominos});
     }
 
     getNewDominoFromCash(newDomino){
-      this.state.dominos.push(newDomino);
-      this.setState(this.state.dominos);
+      if (newDomino){
+        this.state.playerDominos.push(newDomino);
+        this.setState(this.state.playerDominos);
+      }
+      else{
+        alert("No Dominos left in Cash");
+      }
+      
     }
     
     
@@ -31,7 +37,7 @@ class PlayerBox extends Component {
       return (
         <div className = "playerBox">
             <DominoCash changeDominos={this.changeDominos.bind(this)} getNewDominoFromCash={this.getNewDominoFromCash.bind(this)} /> 
-            <DominoPieces dominos = {this.state.dominos}/>
+            <DominoPieces dominos = {this.state.playerDominos}/>
         </div>
       );
     }
