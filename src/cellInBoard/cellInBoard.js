@@ -6,10 +6,6 @@ import DominoPiece from "../dominoPiece/dominoPiece";
 class CellInBoard extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      isHorizontal : true,
-      Domino : null
-    };
   }
   
   AddDominoToBoard(newDomino){
@@ -17,9 +13,9 @@ class CellInBoard extends Component {
   }
 
   render() {
-    const DOMINO = null;
-    if (this.state.Domino != null){
-      DOMINO = <DominoPiece firstNum = {this.state.Domino.firstNum} secondNum = {this.state.Domino.secondNum} isHorizontal = {this.state.isHorizontal}/>
+    let DOMINO = null;
+    if (this.props.isDisplayed == true){
+      DOMINO = <DominoPiece firstNum = {this.props.firstNum} secondNum = {this.props.secondNum} isHorizontal = {this.props.isHorizontal}/>
     }
     return (
       <div className = "cellInBoard">

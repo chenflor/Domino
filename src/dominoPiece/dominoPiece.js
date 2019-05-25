@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import dominoPieceTheme from "./dominoPieceTheme.css";
+import propTypes from "prop-types"
 
   class DominoPiece extends Component {
     constructor(props){
@@ -86,5 +87,11 @@ import dominoPieceTheme from "./dominoPieceTheme.css";
     );
   }
 }
+
+DominoPiece.propTypes ={
+  firstNum : propTypes.number,
+  secondNum : propTypes.number
+};
+
   
 export default DominoPiece;
