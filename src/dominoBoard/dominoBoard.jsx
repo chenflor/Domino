@@ -71,6 +71,7 @@ class DominoBoard extends React.Component{
     //Remmember to updateValidNumbers as well & SetState...
   }
   createDominoCellFromPlayerDomino(playerDomino){
+    console.log("In createDominoCellFromPlayerDomino" + playerDomino);
     return ({
       isDisplayed  : true,
       firstNum     : playerDomino.firstNum,

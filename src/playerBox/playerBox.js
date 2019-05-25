@@ -32,13 +32,23 @@ class PlayerBox extends Component {
       
       
     }
+
+    removeFromplayerDominos(dominoToBeRemoved){
+      var index = this.state.playerDominos.indexOf(dominoToBeRemoved);
+      if (index > -1) {
+        this.state.playerDominos.splice(index, 1);
+        this.setState({
+          playerDominos : this.state.playerDominos
+        });
+}
+    }
     insertDominoToGameBoard(){
       console.log("In insertDominoToGameBoard ");
       if(this.state.selectedDomino!=undefined && this.state.playerDominos.includes(this.state.selectedDomino)){
-        this.state.playerDominos.pop(this.state.selectedDomino);
-        this.state.selectedDomino =  this.state.playerDominos[0];
-        this.setState({playerDominos : this.state.playerDominos,selectedDomino : this.state.playerDominos[0]});
-        this.props.insertDominoToGameBoard(this.state.selectedDomino);
+        let tmpPiece = this.state.selectedDomino;
+        this.removeFromplayerDominos(this.state.selectedDomino);
+        this.setState({selectedDomino : this.state.playerDominos[0]});
+        this.props.insertDominoToGameBoard(tmpPiece);
       }
       else{
         console.warn("no domino can be inserted");
