@@ -1,12 +1,11 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
 import DominoBoard from './dominoBoard/dominoBoard.jsx';
 
 const App = () => (
-    <div>
-        <DominoBoard/>  
-    </div>
+    <React.Fragment>
+        <DominoBoard/>
+    </React.Fragment>
 );
 
 ReactDOM.render(<App />, document.getElementById("root"));

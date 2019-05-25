@@ -12,8 +12,6 @@ const INITIAL_DOMINO_VALUES = {
 class DominoGameBoard extends Component {
   constructor(props) {
     super(props);
-    this.rows = 28;
-    this.cols = 28;
     this.state = {
       dominosBoard: this.makeEmptyBoard()
     };
@@ -22,18 +20,21 @@ class DominoGameBoard extends Component {
     
 
   makeEmptyBoard() {
+    let rows = 28;
+    let cols = 28;
     var board = new Array;
-    for (var row = 0; row < this.rows; row++) {
+    for (var row = 0; row < rows; row++) {
       board[row] = new Array;
-      for (var col = 0; col < this.cols; col++) {
+      for (var col = 0; col < cols; col++) {
         board[row][col] = INITIAL_DOMINO_VALUES;
       }
     }
     return board;
   }
 
-  insertCellToBoard(cellToBeInserted){
-    dominosBoard[cellToBeInserted.row][cellToBeInserted.col] = cellToBeInserted;
+  insertCellToGameBoard(cellToBeInserted,row,col){
+      this.state.dominosBoard[row][col] = cellToBeInserted;
+      this.setState({dominosBoard : this.state.dominosBoard});
   }
 
   displayCell(DominoGameCell){
