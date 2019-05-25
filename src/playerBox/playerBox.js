@@ -9,23 +9,39 @@ class PlayerBox extends Component {
       super();
       console.log("HELLO");
       this.state = {
-        playerDominos : []
+        playerDominos : [],
+        selectedDomino : undefined
       };
     }
 
     changeDominos(dominos){
       console.log("Change Doimnos called");
 
-      this.setState({playerDominos : dominos});
+      this.setState({playerDominos : dominos, selectedDomino : dominos[0]});
     }
 
     getNewDominoFromCash(newDomino){
       if (newDomino){
         this.state.playerDominos.push(newDomino);
-        this.setState(this.state.playerDominos);
+        this.state.selectedDomino = newDomino;
+        this.setState({playerDominos : this.state.playerDominos, selectedDomino :newDomino});
       }
       else{
         alert("No Dominos left in Cash");
+      }
+      
+      
+    }
+    insertDominoToGameBoard(){
+      console.log("In insertDominoToGameBoard ");
+      if(this.state.selectedDomino!=undefined && this.state.playerDominos.includes(this.state.selectedDomino)){
+        this.state.playerDominos.pop(this.state.selectedDomino);
+        this.state.selectedDomino =  this.state.playerDominos[0];
+        this.setState({playerDominos : this.state.playerDominos,selectedDomino : this.state.playerDominos[0]});
+        this.props.insertDominoToGameBoard(this.state.selectedDomino);
+      }
+      else{
+        console.warn("no domino can be inserted");
       }
       
     }
@@ -36,7 +52,11 @@ class PlayerBox extends Component {
       console.log("player box render");
       return (
         <div className = "playerBox">
-            <DominoCash changeDominos={this.changeDominos.bind(this)} getNewDominoFromCash={this.getNewDominoFromCash.bind(this)} /> 
+            <DominoCash 
+            changeDominos={this.changeDominos.bind(this)} 
+            getNewDominoFromCash={this.getNewDominoFromCash.bind(this)} 
+            newGame = {this.props.newGame}
+            insertDominoToGameBoard = {this.insertDominoToGameBoard.bind(this)}/> 
             <DominoPieces dominos = {this.state.playerDominos}/>
         </div>
       );

@@ -39,9 +39,9 @@ import propTypes from "prop-types"
   }
 
   render() {
-    console.log("Domino Piece Render");
-    console.log("FirstNum:" + this.props.firstNum);
-    console.log("Second Num:" + this.props.secondNum);
+    // console.log("Domino Piece Render");
+    // console.log("FirstNum:" + this.props.firstNum);
+    // console.log("Second Num:" + this.props.secondNum);
     return (
       <div className = "dominoPiece">
         <table className = "upSection">

@@ -56,6 +56,7 @@ class DominoCash extends Component {
     }
 
     newGame(){
+      this.props.newGame();
       this.dominosCashArray = this.initDominoCashArray();
         var newSixDominos = [];
         for(var i = 0; i< 6 ;i++){
@@ -75,6 +76,7 @@ class DominoCash extends Component {
       return (
         <div className = "dominoCash">
             <button onClick={this.newGame.bind(this)}>New Game</button>
+            <button onClick={this.props.insertDominoToGameBoard}>insertDominoToGameBoard</button>
             <button onClick={this.getNewDominoFromCash.bind(this)}>New Domino</button>
         </div>
       );
@@ -84,7 +86,8 @@ class DominoCash extends Component {
 
   DominoCash.propTypes ={
     getNewDominoFromCash : propTypes.func,
-    changeDominos : propTypes.func
+    changeDominos : propTypes.func,
+    insertDominoToGameBoard : propTypes.func
   };
   
   export default DominoCash;
