@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import dominoBoardTheme from "./dominoBoardTheme.css";
 import PlayerBox from "../playerBox/PlayerBox.js"
+import CellInBoard from "../cellInBoard/cellInBoard.js"
 
 class DominoBoard extends Component {
   constructor() {
@@ -14,14 +15,17 @@ class DominoBoard extends Component {
 
   makeEmptyBoard() {
     var board = [];
-    for (var y = 0; y < this.rows; y++) {
-      board[y] = [];
-      for (var x = 0; x < this.cols; x++) {
-        board[y][x] = (<div key = {y.toString() + x.toString()} className = 'cell'> 
-        hi</div>);
+    for (var row = 0; row < this.rows; row++) {
+      board[row] = [];
+      for (var col = 0; col < this.cols; col++) {
+        board[row][col] = new CellInBoard(row,col);
       }
     }
     return board;
+  }
+
+  insertCellToBoard(cellToBeInserted){
+    dominosBoard[cellToBeInserted.row][cellToBeInserted.col] = cellToBeInserted;
   }
 
   render() {
@@ -29,8 +33,9 @@ class DominoBoard extends Component {
     return (
       <div className = "board">
         <div className = "playingBoard">
-        {this.state.dominosBoard.map((row) => 
-          row.map((cell) => cell))} </div>
+          {this.state.dominosBoard.map((row) => 
+            row.map((cell) => cell.render()))} 
+        </div>
         <PlayerBox/> 
       </div>
     );

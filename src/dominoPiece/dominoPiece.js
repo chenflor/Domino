@@ -2,13 +2,9 @@ import React, { Component } from "react";
 import dominoPieceTheme from "./dominoPieceTheme.css";
 
   class DominoPiece extends Component {
-  constructor(firstNum,secondNum) {
-    super();
-    this.firstNum = firstNum;
-    this.secondNum = secondNum;
-    
-  }
-
+    constructor(props){
+      super(props);
+    }
   setDominoNumbers(dotPlace,number){
     var dotclassName = "dot";
     switch(dotPlace) {
@@ -43,24 +39,26 @@ import dominoPieceTheme from "./dominoPieceTheme.css";
 
   render() {
     console.log("Domino Piece Render");
+    console.log("FirstNum:" + this.props.firstNum);
+    console.log("Second Num:" + this.props.secondNum);
     return (
       <div className = "dominoPiece">
         <table className = "upSection">
         <tbody>
             <tr className="row">
-              <th className={this.setDominoNumbers(1,this.firstNum)}> </th>
-              <th className={this.setDominoNumbers(2,this.firstNum)}></th>
-              <th className={this.setDominoNumbers(3,this.firstNum)}></th>
+              <th className={this.setDominoNumbers(1,this.props.firstNum)}> </th>
+              <th className={this.setDominoNumbers(2,this.props.firstNum)}></th>
+              <th className={this.setDominoNumbers(3,this.props.firstNum)}></th>
             </tr>
             <tr className="row">
-              <th className={this.setDominoNumbers(4,this.firstNum)}></th>
-              <th className={this.setDominoNumbers(5,this.firstNum)}></th>
-              <th className={this.setDominoNumbers(6,this.firstNum)}></th>
+              <th className={this.setDominoNumbers(4,this.props.firstNum)}></th>
+              <th className={this.setDominoNumbers(5,this.props.firstNum)}></th>
+              <th className={this.setDominoNumbers(6,this.props.firstNum)}></th>
             </tr>
             <tr className="row">
-              <th className={this.setDominoNumbers(7,this.firstNum)}></th>
-              <th className={this.setDominoNumbers(8,this.firstNum)}></th>
-              <th className={this.setDominoNumbers(9,this.firstNum)}></th>
+              <th className={this.setDominoNumbers(7,this.props.firstNum)}></th>
+              <th className={this.setDominoNumbers(8,this.props.firstNum)}></th>
+              <th className={this.setDominoNumbers(9,this.props.firstNum)}></th>
             </tr>
             </tbody>
           </table>
@@ -68,19 +66,19 @@ import dominoPieceTheme from "./dominoPieceTheme.css";
           <table className = "buttomSection">
           <tbody>
             <tr className="row">
-              <th className={this.setDominoNumbers(1,this.secondNum)}> </th>
-              <th className={this.setDominoNumbers(2,this.secondNum)}></th>
-              <th className={this.setDominoNumbers(3,this.secondNum)}></th>
+              <th className={this.setDominoNumbers(1,this.props.secondNum)}> </th>
+              <th className={this.setDominoNumbers(2,this.props.secondNum)}></th>
+              <th className={this.setDominoNumbers(3,this.props.secondNum)}></th>
             </tr>
             <tr className="row">
-              <th className={this.setDominoNumbers(4,this.secondNum)}></th>
-              <th className={this.setDominoNumbers(5,this.secondNum)}></th>
-              <th className={this.setDominoNumbers(6,this.secondNum)}></th>
+              <th className={this.setDominoNumbers(4,this.props.secondNum)}></th>
+              <th className={this.setDominoNumbers(5,this.props.secondNum)}></th>
+              <th className={this.setDominoNumbers(6,this.props.secondNum)}></th>
             </tr>
             <tr className="row">
-              <th className={this.setDominoNumbers(7,this.secondNum)}></th>
-              <th className={this.setDominoNumbers(8,this.secondNum)}></th>
-              <th className={this.setDominoNumbers(9,this.secondNum)}></th>
+              <th className={this.setDominoNumbers(7,this.props.secondNum)}></th>
+              <th className={this.setDominoNumbers(8,this.props.secondNum)}></th>
+              <th className={this.setDominoNumbers(9,this.props.secondNum)}></th>
             </tr>
             </tbody>
           </table>
@@ -88,4 +86,5 @@ import dominoPieceTheme from "./dominoPieceTheme.css";
     );
   }
 }
+  
 export default DominoPiece;
