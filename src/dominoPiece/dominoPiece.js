@@ -5,7 +5,9 @@ import propTypes from "prop-types"
   class DominoPiece extends Component {
     constructor(props){
       super(props);
+      this.setSelected = this.setSelected.bind(this);
     }
+
   setDominoNumbers(dotPlace,number){
     var dotclassName = "dot";
     switch(dotPlace) {
@@ -38,12 +40,25 @@ import propTypes from "prop-types"
     return dotclassName;
   }
 
+  setSelected(){
+    console.log(this.props);
+    let domino = {firstNum : this.props.firstNum, secondNum : this.props.secondNum};
+    this.props.setSelected(domino);
+  }
+
   render() {
+    console.log("Is selected"+ this.props.isSelected);
+    let selectedClassString = "";
+    if (this.props.isSelected){
+      selectedClassString = "dominoPiece-selected"
+    }
     // console.log("Domino Piece Render");
     // console.log("FirstNum:" + this.props.firstNum);
     // console.log("Second Num:" + this.props.secondNum);
     return (
-      <div className = "dominoPiece">
+      <div 
+        className = {"dominoPiece " + selectedClassString} 
+        onClick={this.setSelected}>
         <table className = "upSection">
         <tbody>
             <tr className="row">
@@ -90,7 +105,9 @@ import propTypes from "prop-types"
 
 DominoPiece.propTypes ={
   firstNum : propTypes.number,
-  secondNum : propTypes.number
+  secondNum : propTypes.number,
+  isSelected : propTypes.bool,
+  setSelected : propTypes.func
 };
 
   

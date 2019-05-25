@@ -6,6 +6,10 @@
 
 }
 
+.dominoPiece-selected{
+    background-color: yellow;
+}
+
 .visible {
     background-color: black;
 } 

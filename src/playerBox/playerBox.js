@@ -3,6 +3,10 @@ import playerBoxTheme from "./playerBoxTheme.css";
 import DominoPiece from "../dominoPiece/dominoPiece";
 import DominoCash from "../dominoCash/dominoCash";
 import DominoPieces from "../dominoPieces/dominoPieces";
+import DominoUtils from "../dominoUtils/dominoUtils";
+
+
+
 
 class PlayerBox extends Component {
     constructor() {
@@ -44,7 +48,7 @@ class PlayerBox extends Component {
     }
     insertDominoToGameBoard(){
       console.log("In insertDominoToGameBoard ");
-      if(this.state.selectedDomino!=undefined && this.state.playerDominos.includes(this.state.selectedDomino)){
+      if(this.state.selectedDomino!=undefined && this.state.playerDominos.some(domino => DominoUtils.isDominoEqual(domino,this.state.selectedDomino))){
         let tmpPiece = this.state.selectedDomino;
         this.removeFromplayerDominos(this.state.selectedDomino);
         this.setState({selectedDomino : this.state.playerDominos[0]});
@@ -54,6 +58,26 @@ class PlayerBox extends Component {
         console.warn("no domino can be inserted");
       }
       
+    }
+
+    findDominoInPlayerDomino(someDomino){
+      for(var i=0; i<this.state.playerDominos.length; i++ ){
+        if(DominoUtils.isDominoEqual(someDomino,this.state.playerDominos[i])){
+          return this.state.playerDominos[i];
+        }
+      }
+      return null;
+    }
+    setSelected(selectedDomino){
+      console.log(selectedDomino);
+      console.log(this.state.playerDominos);
+      console.log("In playerBox selectedDomino" + selectedDomino);
+      if(selectedDomino!=undefined && this.state.playerDominos.some(domino => DominoUtils.isDominoEqual(domino,selectedDomino))){
+        console.log("Finally");
+        let tmp = this.findDominoInPlayerDomino(selectedDomino);
+        console.log("New Selected is "+ tmp);
+        this.setState({selectedDomino : tmp});
+      }
     }
     
     
@@ -67,7 +91,7 @@ class PlayerBox extends Component {
             getNewDominoFromCash={this.getNewDominoFromCash.bind(this)} 
             newGame = {this.props.newGame}
             insertDominoToGameBoard = {this.insertDominoToGameBoard.bind(this)}/> 
-            <DominoPieces dominos = {this.state.playerDominos}/>
+            <DominoPieces dominos = {this.state.playerDominos} selectedDomino = {this.state.selectedDomino} setSelected ={this.setSelected.bind(this)}/>
         </div>
       );
     }
