@@ -1,5 +1,6 @@
 import React from "react";
 import DominoPiece from "../dominoPiece/dominoPiece";
+import dominoPiecesTheme from "./dominoPiecesTheme.css";
 
 function DominoPieces(props){
     console.log("in domino pieces");
