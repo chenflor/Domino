@@ -21,8 +21,8 @@ class DominoBoard extends React.Component{
     // each entry is a object at this format: {number,isFirstNum ,row,col}
     this.potentialDominos = [];
     this.firstRound = true;
-
-
+    this.rows = 28;
+    this.cols = 28;
     this.state = {
       dominosBoard : this.makeEmptyBoard(),
       validNumbers : [0,1,2,3,4,5,6]
@@ -30,12 +30,10 @@ class DominoBoard extends React.Component{
   }
   
   makeEmptyBoard() {
-    let rows = 28;
-    let cols = 28;
     var board = new Array;
-    for (var row = 0; row < rows; row++) {
+    for (var row = 0; row < this.rows; row++) {
       board[row] = new Array;
-      for (var col = 0; col < cols; col++) {
+      for (var col = 0; col < this.cols; col++) {
         board[row][col] = INITIAL_DOMINO_VALUES;
       }
     }
@@ -44,12 +42,17 @@ class DominoBoard extends React.Component{
   
   whereDominoCanBeinserted(domino){
     if(this.firstRound){
+      this.setState({
+        validNumbers : [domino.firstNum,domino.secondNum]
+      });
       return {number : domino.firstNum, row : 14, col : 14};
     }
 
-    return potentialDominos.find(potential => 
+    let ans = potentialDominos.find(potential => 
       ((potential.number == domino.firstNum)  && (potential.isFirstNum == true) ||
        (potential.number == domino.secondNum) && (potential.isFirstNum == false)));
+    this.updatePotentialDominoes(playerDominoToBeInserted);
+    return ans;
   }
 
   canDominoBeInsertedToGameBoard(domino){
@@ -67,24 +70,37 @@ class DominoBoard extends React.Component{
   }
 
   updatePotentialDominoes(domino){
-    //To-DO :)
     //Remmember to updateValidNumbers as well & SetState...
+    var newValidNumbers = [];
+    for (var row = 0; row < this.rows; row++) {
+      for (var col = 0; col < this.cols; col++) {
+        newValidNumbers[row][col] = INITIAL_DOMINO_VALUES;
+      }
+    }
   }
   createDominoCellFromPlayerDomino(playerDomino){
     console.log("In createDominoCellFromPlayerDomino" + playerDomino);
+    sameNumOnDomino = false;
+    if(playerDomino.firstNum == playerDomino.secondNum){
+      sameNumOnDomino = true;
+    }
     return ({
-      isDisplayed  : true,
-      firstNum     : playerDomino.firstNum,
-      secondNum    : playerDomino.secondNum,
-      isHorizontal : playerDomino.isHorizontal
+      isDisplayed     : true,
+      firstNum        : playerDomino.firstNum,
+      secondNum       : playerDomino.secondNum,
+      aboveIsAvailable: sameNumOnDomino,
+      belowIsAvailable: sameNumOnDomino,
+      leftIsAvailable : true,
+      rightIsAvailable: true,
+      isHorizontal    : playerDomino.isHorizontal
     });
   }
 
   insertDominoToGameBoard(playerDominoToBeInserted){
     if(this.canDominoBeInsertedToGameBoard(playerDominoToBeInserted)){
-      let location = this.whereDominoCanBeinserted(playerDominoToBeInserted);
-      this.updatePotentialDominoes(playerDominoToBeInserted);
-      this.state.dominosBoard[location.row][location.col] = this.createDominoCellFromPlayerDomino(playerDominoToBeInserted);
+      let dominoCell = this.createDominoCellFromPlayerDomino(playerDominoToBeInserted);
+      let location = this.whereDominoCanBeinserted(dominoCell);
+      this.state.dominosBoard[location.row][location.col] = dominoCell;
       this.setState({dominosBoard : this.state.dominosBoard});
     }
     else{

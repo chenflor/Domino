@@ -1,10 +1,10 @@
 .playerBox{
-    width: 30%;
-    height: 15%;
+    width: 40%;
+    height: 25%;
     background:rgb(186, 186, 241);
     position: absolute; 
-    margin-top:5% ;
-    margin-left: 25%;
+    margin-top:1% ;
+    margin-left: 30%;
     
 }
 .playersTitle{

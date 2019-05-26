@@ -85,8 +85,8 @@ class DominoCash extends Component {
 }
 
   DominoCash.propTypes ={
-    getNewDominoFromCash : propTypes.func,
-    changeDominos : propTypes.func,
+    getNewDominoFromCash :    propTypes.func,
+    changeDominos :           propTypes.func,
     insertDominoToGameBoard : propTypes.func
   };
   

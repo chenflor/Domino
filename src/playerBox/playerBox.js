@@ -12,6 +12,7 @@ class PlayerBox extends Component {
     constructor() {
       super();
       console.log("HELLO");
+      this.maxNumberOfDominos = 6;
       this.state = {
         playerDominos : [],
         selectedDomino : undefined
@@ -25,13 +26,16 @@ class PlayerBox extends Component {
     }
 
     getNewDominoFromCash(newDomino){
-      if (newDomino){
+      if(this.state.playerDominos.length >= this.maxNumberOfDominos){
+        alert("Player can have up to 6 domino pieces");
+      }
+      else if(!newDomino){
+        alert("No Dominos left in Cash");
+      }
+      else{
         this.state.playerDominos.push(newDomino);
         this.state.selectedDomino = newDomino;
         this.setState({playerDominos : this.state.playerDominos, selectedDomino :newDomino});
-      }
-      else{
-        alert("No Dominos left in Cash");
       }
       
       
