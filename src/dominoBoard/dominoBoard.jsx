@@ -3,6 +3,7 @@ import dominoBoardTheme from "./dominoBoardTheme.css";
 import PlayerBox from "../playerBox/PlayerBox.js"
 import DominoGameBoard from "../DominoGameBoard/dominoGameBoard.jsx";
 import DominoBoardManger from "../dominoBoardManger/dominoBoardManger.js";
+import Statistics from "../statistics/statistics.js"
 
 const INITIAL_DOMINO_VALUES = {
   isDisplayed  : false,
@@ -80,9 +81,9 @@ class DominoBoard extends React.Component{
   }
   createDominoCellFromPlayerDomino(playerDomino){
     console.log("In createDominoCellFromPlayerDomino" + playerDomino);
-    sameNumOnDomino = false;
+    let sameNumOnDomino = false;
     if(playerDomino.firstNum == playerDomino.secondNum){
-      sameNumOnDomino = true;
+    let sameNumOnDomino = true;
     }
     return ({
       isDisplayed     : true,
@@ -112,6 +113,7 @@ class DominoBoard extends React.Component{
   render(){
     return (
       <div className = "board">
+        <Statistics/>
         <DominoGameBoard dominosBoard={this.state.dominosBoard}/>
         <PlayerBox validNumbers = {this.state.validNumbers} newGame ={this.newGame.bind(this)} insertDominoToGameBoard ={this.insertDominoToGameBoard.bind(this)}/> 
       </div>
