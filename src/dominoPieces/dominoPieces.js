@@ -23,9 +23,9 @@ function DominoPieces(props){
 }
 
 DominoPieces.propTypes ={
-    dominos : propTypes.array,
+    dominos        : propTypes.array,
     selectedDomino : propTypes.object,
-    setSelected : propTypes.func
+    setSelected    : propTypes.func
 }
 
 export default DominoPieces;

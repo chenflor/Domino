@@ -1,6 +1,6 @@
 .cellInBoard{
-    width: 3%;
-    height: 3%;
-    /* border: 2px solid white; */
+    width: 35px;
+    height: 60px;
+    float: left;
     
 }

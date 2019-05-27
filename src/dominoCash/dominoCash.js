@@ -28,6 +28,9 @@ class DominoCash extends Component {
     constructor(props) {
       super(props);
       this.length = 28;
+      this.numOfTimesPlayerTookFromCash = 0;
+      this.gameStartTime = 0;
+      this.timeFromGameStart = 0;
       this.dominosCashArray = this.initDominoCashArray();
           
     }
@@ -64,9 +67,11 @@ class DominoCash extends Component {
         }
         console.log(newSixDominos);
         this.props.changeDominos(newSixDominos);
+        this.numOfTimesPlayerTookFromCash = 0;
     }
 
     getNewDominoFromCash(){
+      this.numOfTimesPlayerTookFromCash = this.numOfTimesPlayerTookFromCash + 1;
       var newDomino = this.getARandomDomino();
       this.props.getNewDominoFromCash(newDomino);
     }
@@ -85,9 +90,10 @@ class DominoCash extends Component {
 }
 
   DominoCash.propTypes ={
-    getNewDominoFromCash :    propTypes.func,
-    changeDominos :           propTypes.func,
-    insertDominoToGameBoard : propTypes.func
+    getNewDominoFromCash         : propTypes.func,
+    changeDominos                : propTypes.func,
+    insertDominoToGameBoard      : propTypes.func,
+    numOfTimesPlayerTookFromCash : propTypes.number
   };
   
   export default DominoCash;

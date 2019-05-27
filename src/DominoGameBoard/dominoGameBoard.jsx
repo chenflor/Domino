@@ -34,6 +34,7 @@ class DominoGameBoard extends Component {
                 return(
                     <div className="playingBoardRow">  
                         {(dominoGameCells.map(function(dominoGameCell) {
+                          //need to add key!
                             return(this.displayCell(dominoGameCell));
                         }.bind(this)))}
                     </div>

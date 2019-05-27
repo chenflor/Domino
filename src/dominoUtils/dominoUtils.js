@@ -1,5 +1,5 @@
 function DominoUtils(){}
-DominoUtils.isDominoEqual =function(domino,otherDomino)
+DominoUtils.isDominoEqual =function(domino, otherDomino)
     {
       if(domino && otherDomino){
         return (domino.firstNum == otherDomino.firstNum && domino.secondNum == otherDomino.secondNum);

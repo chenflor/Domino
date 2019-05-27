@@ -11,7 +11,7 @@ import DominoUtils from "../dominoUtils/dominoUtils";
 class PlayerBox extends Component {
     constructor() {
       super();
-      console.log("HELLO");
+      // console.log("HELLO");
       this.maxNumberOfDominos = 6;
       this.state = {
         playerDominos : [],
@@ -52,7 +52,10 @@ class PlayerBox extends Component {
     }
     insertDominoToGameBoard(){
       console.log("In insertDominoToGameBoard ");
-      if(this.state.selectedDomino!=undefined && this.state.playerDominos.some(domino => DominoUtils.isDominoEqual(domino,this.state.selectedDomino))){
+      if(this.state.selectedDomino!=undefined && 
+        this.state.playerDominos.some(domino => DominoUtils.isDominoEqual(domino,this.state.selectedDomino))&&
+        (this.props.validNumbers.includes(this.state.selectedDomino.firstNum)||
+        this.props.validNumbers.includes(this.state.selectedDomino.secondNum))){
         let tmpPiece = this.state.selectedDomino;
         this.removeFromplayerDominos(this.state.selectedDomino);
         this.setState({selectedDomino : this.state.playerDominos[0]});
@@ -94,6 +97,7 @@ class PlayerBox extends Component {
             changeDominos={this.changeDominos.bind(this)} 
             getNewDominoFromCash={this.getNewDominoFromCash.bind(this)} 
             newGame = {this.props.newGame}
+            numOfTimesPlayerTookFromCash  = {this.props.numOfTimesPlayerTookFromCash}
             insertDominoToGameBoard = {this.insertDominoToGameBoard.bind(this)}/> 
             <DominoPieces dominos = {this.state.playerDominos} selectedDomino = {this.state.selectedDomino} setSelected ={this.setSelected.bind(this)}/>
         </div>
