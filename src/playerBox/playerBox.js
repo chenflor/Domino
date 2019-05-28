@@ -91,6 +91,7 @@ class PlayerBox extends Component {
 
     render() {
       console.log("player box render");
+      console.log(this.props.validNumbers);
       return (
         <div className = "playerBox">
             <DominoCash 
@@ -99,7 +100,11 @@ class PlayerBox extends Component {
             newGame = {this.props.newGame}
             numOfTimesPlayerTookFromCash  = {this.props.numOfTimesPlayerTookFromCash}
             insertDominoToGameBoard = {this.insertDominoToGameBoard.bind(this)}/> 
-            <DominoPieces dominos = {this.state.playerDominos} selectedDomino = {this.state.selectedDomino} setSelected ={this.setSelected.bind(this)}/>
+            <DominoPieces 
+            dominos = {this.state.playerDominos} 
+            selectedDomino = {this.state.selectedDomino} 
+            validNumbers = {this.props.validNumbers}
+            setSelected ={this.setSelected.bind(this)}/>
         </div>
       );
     }

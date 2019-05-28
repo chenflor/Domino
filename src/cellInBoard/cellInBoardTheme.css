@@ -1,6 +1,14 @@
 .cellInBoard{
-    width: 35px;
-    height: 60px;
+    width: 1.5rem;
+    height: 3rem;
     float: left;
     
+    
+}
+
+.Horizontal{
+    transform: rotate(90deg);
+    height: 1.5rem;
+    width: 3rem;
+    float: left;
 }

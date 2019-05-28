@@ -46,18 +46,28 @@ import propTypes from "prop-types"
     this.props.setSelected(domino);
   }
 
+  isOptionalNumber(firstNum,secondNum){
+    let className = "";
+    console.log(this.props.validNumbers);
+    if(this.props.validNumbers){
+      if(!(this.props.validNumbers.includes(firstNum)||
+        this.props.validNumbers.includes(secondNum))){
+          className = " isNotValidPiece";
+        }
+    }
+    return className;
+  }
+
   render() {
     console.log("Is selected"+ this.props.isSelected);
     let selectedClassString = "";
     if (this.props.isSelected){
       selectedClassString = "dominoPiece-selected"
     }
-    // console.log("Domino Piece Render");
-    // console.log("FirstNum:" + this.props.firstNum);
-    // console.log("Second Num:" + this.props.secondNum);
     return (
       <div 
-        className = {"dominoPiece " + selectedClassString} 
+        className = {"dominoPiece " + selectedClassString
+                       + this.isOptionalNumber(this.props.firstNum,this.props.secondNum)} 
         onClick={this.setSelected}>
         <table className = "upSection">
         <tbody>

@@ -6,7 +6,7 @@ import DominoUtils from "../dominoUtils/dominoUtils";
 
 function DominoPieces(props){
     console.log("in domino pieces");
-    
+    console.log(props.validNumbers);
     return (
         <div className = "dominoPieces">
             {props.dominos.map(domino => 
@@ -15,6 +15,7 @@ function DominoPieces(props){
              firstNum = {domino.firstNum} 
              secondNum = {domino.secondNum}
              isSelected = {DominoUtils.isDominoEqual(props.selectedDomino, domino) }
+             validNumbers = {props.validNumbers}
              setSelected = {props.setSelected}/>)}
         </div>
 

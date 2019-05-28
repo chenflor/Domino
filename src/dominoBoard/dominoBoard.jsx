@@ -181,7 +181,8 @@ class DominoBoard extends React.Component{
       <div className = "board">
         <Statistics/>
         <DominoGameBoard dominosBoard={this.state.dominosBoard}/>
-        <PlayerBox validNumbers = {this.state.validNumbers} 
+        <PlayerBox 
+        validNumbers = {this.state.validNumbers} 
         newGame ={this.newGame.bind(this)} 
         insertDominoToGameBoard ={this.insertDominoToGameBoard.bind(this)}
         setSelected = {this.setSelected.bind(this)}/> 
