@@ -14,12 +14,14 @@ class DominoGameBoard extends Component {
     // console.log("In DisplayCell" + DominoGameCell);
     if(DominoGameCell.isDisplayed){
         console.log("Display Domino in game Board with firstNum=" + DominoGameCell.firstNum + "SecondDnum"+ DominoGameCell.secondNum);
+        console.log("GAME.." + this.props.isPotential);
         return(
             <CellInBoard 
                 isDisplayed  = {DominoGameCell.isDisplayed} 
                 firstNum     = {DominoGameCell.firstNum} 
                 secondNum    = {DominoGameCell.secondNum} 
-                isHorizontal = {DominoGameCell.isHorizontal}/>
+                isHorizontal = {DominoGameCell.isHorizontal}
+                isPotential  = {DominoGameCell.isPotential}/>
         );
     }
     else{

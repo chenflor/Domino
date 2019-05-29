@@ -60,6 +60,7 @@ class PlayerBox extends Component {
         this.removeFromplayerDominos(this.state.selectedDomino);
         this.setState({selectedDomino : this.state.playerDominos[0]});
         this.props.insertDominoToGameBoard(tmpPiece);
+        this.setState({selectedDomino : undefined});
       }
       else{
         console.warn("no domino can be inserted");
@@ -84,6 +85,7 @@ class PlayerBox extends Component {
         let tmp = this.findDominoInPlayerDomino(selectedDomino);
         console.log("New Selected is "+ tmp);
         this.setState({selectedDomino : tmp});
+        this.props.calcPotentialDominos(selectedDomino);
       }
     }
     

@@ -15,7 +15,9 @@ class CellInBoard extends Component {
   render() {
     let DOMINO = null;
     if (this.props.isDisplayed == true){
-      DOMINO = <DominoPiece firstNum = {this.props.firstNum} secondNum = {this.props.secondNum} isHorizontal = {this.props.isHorizontal}/>
+      console.log("cellIN/.." + this.props.isPotential);
+      DOMINO = <DominoPiece firstNum = {this.props.firstNum} secondNum = {this.props.secondNum} 
+      isHorizontal = {this.props.isHorizontal} isPotential = {this.props.isPotential}/>
     }
     return (
       <div className = "cellInBoard">

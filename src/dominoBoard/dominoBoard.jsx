@@ -25,8 +25,8 @@ class DominoBoard extends React.Component{
     this.rows = 28;
     this.cols = 28;
     this.state = {
-      dominosBoard : this.makeEmptyBoard(),
-      validNumbers : [0,1,2,3,4,5,6]
+      dominosBoard               : this.makeEmptyBoard(),
+      validNumbers               : [0,1,2,3,4,5,6],
     };
   }
   
@@ -58,7 +58,7 @@ class DominoBoard extends React.Component{
         endLoop = true;
         
       }
-      ans =  {row : this.potentialDominos[i].row, col: this.potentialDominos[i].col};
+      ans =  {row : this.potentialDominos[i].potentialRow, col: this.potentialDominos[i].potentialCol};
       if (endLoop){
         if (reverse){
           let tmp = domino.firstNum;
@@ -95,25 +95,27 @@ class DominoBoard extends React.Component{
     return false;
   }
 
-  createPotentialCell(number,row,col,isFirstNum){
+  createPotentialCell(number,pRow,pCol,row,col,isFirstNum){
     return(
       {
-        number : number,
-        row    : row,
-        col    : col,
-        isFirstNum : isFirstNum
+        number       : number,
+        potentialRow : pRow,
+        potentialCol : pCol,
+        isFirstNum   : isFirstNum,
+        row          : row,
+        col          : col
       }
     );
   }
   _addToPotentialAroundDomino(domino,row,col){
-    this.potentialDominos.push(this.createPotentialCell(domino.firstNum,row,col-1, true));
-    this.potentialDominos.push(this.createPotentialCell(domino.secondNum,row,col+1, false));
+    this.potentialDominos.push(this.createPotentialCell(domino.firstNum,row,col-1,row,col,true));
+    this.potentialDominos.push(this.createPotentialCell(domino.secondNum,row,col+1,row,col,false));
     if(this.isDoubleDomino(domino)){
-      this.potentialDominos.push(this.createPotentialCell(domino.firstNum,row-1,col,true));
-      this.potentialDominos.push(this.createPotentialCell(domino.secondNum,row-1,col,false));
+      this.potentialDominos.push(this.createPotentialCell(domino.firstNum,row-1,col,row,col,true));
+      this.potentialDominos.push(this.createPotentialCell(domino.secondNum,row-1,col,row,col,false));
     }
   }
-  updatePotentialDominoes(domino,row,col ){
+  updatePotentialDominoes(domino,row,col){
     
     //Remmember to updateValidNumbers as well & SetState...
     if(this.potentialDominos.length == 0){
@@ -127,7 +129,7 @@ class DominoBoard extends React.Component{
       console.log(this.state.dominosBoard);
       for(var i =0; i<this.potentialDominos.length;i++){
         let potentialDomino = this.potentialDominos[i];
-        if(this.state.dominosBoard[potentialDomino.row][potentialDomino.col].isDisplayed == false){
+        if(this.state.dominosBoard[potentialDomino.potentialRow][potentialDomino.potentialCol].isDisplayed == false){
           tmpArr.push(potentialDomino);
         }
       }
@@ -138,16 +140,21 @@ class DominoBoard extends React.Component{
     this.potentialDominos.forEach(
       (potential)=>{if (validNumbers.indexOf(potential.number)==-1) validNumbers.push(potential.number)});
     this.setState({validNumbers:validNumbers});
-    console.log(this.state.validNumbers);
-         
+    console.log(this.state.validNumbers);      
   }
+
   createDominoCellFromPlayerDomino(playerDomino){
     console.log("In createDominoCellFromPlayerDomino" + playerDomino);
+    if(this.isDoubleDomino(playerDomino)){
+
+    }
+
     return ({
       isDisplayed     : true,
       firstNum        : playerDomino.firstNum,
       secondNum       : playerDomino.secondNum,
-      isHorizontal    : playerDomino.isHorizontal
+      isHorizontal    : playerDomino.isHorizontal,
+      isPotential     : false
     });
   }
 
@@ -171,21 +178,38 @@ class DominoBoard extends React.Component{
     
   }
 
-  setSelected(){
-    //calc Actual potential
-
+  calcPotentialDominos(playerDominoToBeInserted){
+    let tempBoard = this.state.dominosBoard;
+    console.log("******calcPotentialDominos***********8888");
+    for(var i =0; i<this.potentialDominos.length;i++){
+      let potentialDomino = this.potentialDominos[i];
+      console.log(potentialDomino.number);
+      console.log(playerDominoToBeInserted);
+      if((potentialDomino.number === playerDominoToBeInserted.firstNum)||
+        (potentialDomino.number === playerDominoToBeInserted.secondNum)){
+          tempBoard[potentialDomino.row][potentialDomino.col].isPotential = true;
+      } 
+      else{
+        tempBoard[potentialDomino.row][potentialDomino.col].isPotential = false;
+      }
+    }
+    this.setState({dominosBoard : tempBoard});
   }
+
+
 
   render(){
     return (
       <div className = "board">
         <Statistics/>
+        {console.log(this.state.dominosBoard)}
         <DominoGameBoard dominosBoard={this.state.dominosBoard}/>
         <PlayerBox 
         validNumbers = {this.state.validNumbers} 
         newGame ={this.newGame.bind(this)} 
         insertDominoToGameBoard ={this.insertDominoToGameBoard.bind(this)}
-        setSelected = {this.setSelected.bind(this)}/> 
+        // setSelected = {this.setSelected.bind(this)}
+        calcPotentialDominos = {this.calcPotentialDominos.bind(this)}/> 
       </div>
     )
   }

@@ -58,6 +58,15 @@ import propTypes from "prop-types"
     return className;
   }
 
+  isPotentialDominoOnBoard(){
+    let className = "";
+    console.log("isPotentialDominoOnBoard " + this.props.isPotential);
+    if(this.props.isPotential){
+      className = " isPotential"
+    }
+    return className;
+  }
+
   render() {
     console.log("Is selected"+ this.props.isSelected);
     let selectedClassString = "";
@@ -67,7 +76,8 @@ import propTypes from "prop-types"
     return (
       <div 
         className = {"dominoPiece " + selectedClassString
-                       + this.isOptionalNumber(this.props.firstNum,this.props.secondNum)} 
+                       + this.isOptionalNumber(this.props.firstNum,this.props.secondNum)
+                       + this.isPotentialDominoOnBoard()} 
         onClick={this.setSelected}>
         <table className = "upSection">
         <tbody>
