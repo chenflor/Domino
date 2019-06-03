@@ -11,7 +11,6 @@ class DominoCash extends Component {
     let ansArray =[];
     let index = 0;
     this.length = 28;
-    console.log(index);
     for(var i=0; i<=6;i++){
       for(var j = i;j<=6;j++){
         ansArray[index] = {firstNum : i, secondNum : j};
@@ -61,13 +60,14 @@ class DominoCash extends Component {
     newGame(){
       this.props.newGame();
       this.dominosCashArray = this.initDominoCashArray();
-        var newSixDominos = [];
+      var newSixDominos = [];
         for(var i = 0; i< 6 ;i++){
-            newSixDominos[i] = this.getARandomDomino();
+          let newDomino = this.getARandomDomino();
+          newSixDominos[i] = newDomino;
         }
-        console.log(newSixDominos);
-        this.props.changeDominos(newSixDominos);
-        this.numOfTimesPlayerTookFromCash = 0;
+      this.props.resetStatAndCangeDominos(newSixDominos);
+      this.numOfTimesPlayerTookFromCash = 0;
+      
     }
 
     getNewDominoFromCash(){
@@ -77,7 +77,6 @@ class DominoCash extends Component {
     }
 
     render() {
-      console.log("dominoCash renderer");
       return (
         <div className = "dominoCash">
             <button onClick={this.newGame.bind(this)}>New Game</button>

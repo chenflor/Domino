@@ -7,8 +7,9 @@ import DominoCash from "../dominoCash/dominoCash.js";
 class Statistics extends Component {
   constructor(i,j) {
     super();
+    this.isNewGameToggle = false;
     this.state = {
-        newGameStartTime: new Date(),
+        newGameStartTime: 0,
         numOfTurns: 0,
         timeFromGameStart: 0,
         avgTimeForPlayerTurn: 0,
@@ -19,14 +20,26 @@ class Statistics extends Component {
 
   componentWillMount(){
     setInterval(function(){
+      if(this.props.isNewGame != this.isNewGameToggle){
+        this.setState({newGameStartTime : new Date()});
+        this.isNewGameToggle = !this.isNewGameToggle;
+      }
+      else if(this.state.newGameStartTime){
         let newTime = "";
-        let minutes = new Date().getMinutes() - this.state.newGameStartTime.getMinutes();
-        let sec = new Date().getSeconds() - this.state.newGameStartTime.getSeconds();
+        let minutes = new Date().getMinutes() - (this.state.newGameStartTime).getMinutes();
+        let sec = new Date().getSeconds();
         newTime = minutes + ':' + sec;
         this.setState({
-          timeFromGameStart: newTime,
-          numOfTimesPlayerTookFromCash: DominoCash.numOfTimesPlayerTookFromCash
+          timeFromGameStart: newTime
         })
+      }
+      this.setState({
+        numOfTurns: this.props.numOfTurns,
+        avgTimeForPlayerTurn: 0,
+        numOfTimesPlayerTookFromCash: this.props.playerTookFromCash,
+        playerScore: this.props.playerScore
+      })
+
     }.bind(this), 1000);
   }
 

@@ -1,13 +1,14 @@
 .playingBoard{
-    width: 60%;
+    width: 44rem;
     display: flex;
     flex-direction: row;
     justify-content: center;
     align-content: center;
-    height: 65%;
+    height: 24rem;
     border: 2px solid black;
-    /* margin-left: 15%; */
+    margin-left: 5%;
     margin-top: 2%;
+    margin-right: 2%;
 }
 .playingBoardRow{
     display: flex;

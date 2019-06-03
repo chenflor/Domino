@@ -41,14 +41,12 @@ import propTypes from "prop-types"
   }
 
   setSelected(){
-    console.log(this.props);
     let domino = {firstNum : this.props.firstNum, secondNum : this.props.secondNum};
     this.props.setSelected(domino);
   }
 
   isOptionalNumber(firstNum,secondNum){
     let className = "";
-    console.log(this.props.validNumbers);
     if(this.props.validNumbers){
       if(!(this.props.validNumbers.includes(firstNum)||
         this.props.validNumbers.includes(secondNum))){
@@ -60,15 +58,21 @@ import propTypes from "prop-types"
 
   isPotentialDominoOnBoard(){
     let className = "";
-    console.log("isPotentialDominoOnBoard " + this.props.isPotential);
     if(this.props.isPotential){
       className = " isPotential"
     }
     return className;
   }
 
+  ishorizontal(){
+    let className = "";
+    if(this.props.isHorizontal){
+      className = " horizontal"
+    }
+    return className;
+  }
+
   render() {
-    console.log("Is selected"+ this.props.isSelected);
     let selectedClassString = "";
     if (this.props.isSelected){
       selectedClassString = "dominoPiece-selected"
@@ -77,7 +81,8 @@ import propTypes from "prop-types"
       <div 
         className = {"dominoPiece " + selectedClassString
                        + this.isOptionalNumber(this.props.firstNum,this.props.secondNum)
-                       + this.isPotentialDominoOnBoard()} 
+                       + this.isPotentialDominoOnBoard() 
+                       + this.ishorizontal()} 
         onClick={this.setSelected}>
         <table className = "upSection">
         <tbody>

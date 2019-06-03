@@ -5,8 +5,6 @@ import dominoPiecesTheme from "./dominoPiecesTheme.css";
 import DominoUtils from "../dominoUtils/dominoUtils";
 
 function DominoPieces(props){
-    console.log("in domino pieces");
-    console.log(props.validNumbers);
     return (
         <div className = "dominoPieces">
             {props.dominos.map(domino => 

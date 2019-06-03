@@ -4,25 +4,31 @@ import DominoPiece from "../dominoPiece/dominoPiece";
 import DominoCash from "../dominoCash/dominoCash";
 import DominoPieces from "../dominoPieces/dominoPieces";
 import DominoUtils from "../dominoUtils/dominoUtils";
-
+import Statistics from "../statistics/statistics.js"
 
 
 
 class PlayerBox extends Component {
     constructor() {
       super();
-      // console.log("HELLO");
       this.maxNumberOfDominos = 6;
+      this.numOfTurns = 0;
+      this.isNewGame = false;
+      this.playerTookFromCash = 0;
       this.state = {
         playerDominos : [],
-        selectedDomino : undefined
+        selectedDomino : undefined,
+        playerScore : 0
       };
     }
 
     changeDominos(dominos){
-      console.log("Change Doimnos called");
-
+      var total = 0;
       this.setState({playerDominos : dominos, selectedDomino : dominos[0]});
+      for(var i=0; i<this.state.playerDominos.length; i++ ){
+        total = total + this.state.playerDominos[i].firstNum + this.state.playerDominos.secondNum; 
+      }
+      this.setState({playerScore : total});
     }
 
     getNewDominoFromCash(newDomino){
@@ -31,14 +37,17 @@ class PlayerBox extends Component {
       }
       else if(!newDomino){
         alert("No Dominos left in Cash");
+        this.gameStatus();
       }
       else{
         this.state.playerDominos.push(newDomino);
         this.state.selectedDomino = newDomino;
         this.setState({playerDominos : this.state.playerDominos, selectedDomino :newDomino});
+        this.playerTookFromCash = this.playerTookFromCash + 1;
+        this.setPlayersScore(true,newDomino.firstNum + newDomino.secondNum);
       }
       
-      
+      this.addToNumOfTurns();
     }
 
     removeFromplayerDominos(dominoToBeRemoved){
@@ -48,10 +57,10 @@ class PlayerBox extends Component {
         this.setState({
           playerDominos : this.state.playerDominos
         });
-}
+      }
+      this.setPlayersScore(false,dominoToBeRemoved.firstNum + dominoToBeRemoved.secondNum);
     }
     insertDominoToGameBoard(){
-      console.log("In insertDominoToGameBoard ");
       if(this.state.selectedDomino!=undefined && 
         this.state.playerDominos.some(domino => DominoUtils.isDominoEqual(domino,this.state.selectedDomino))&&
         (this.props.validNumbers.includes(this.state.selectedDomino.firstNum)||
@@ -61,11 +70,28 @@ class PlayerBox extends Component {
         this.setState({selectedDomino : this.state.playerDominos[0]});
         this.props.insertDominoToGameBoard(tmpPiece);
         this.setState({selectedDomino : undefined});
+        this.addToNumOfTurns();
       }
       else{
         console.warn("no domino can be inserted");
       }
-      
+    }
+
+    gameStatus(){
+      if(this.state.playerDominos.length < 1 && !this.props.firstRound){
+        alert("Game Over - you won!");
+        this.props.newGame();
+        this.numOfTurns = 0;
+        this.isNewGame = !this.isNewGame;
+        this.playerTookFromCash = 0;
+      }
+    }
+
+    resetStatAndCangeDominos(dominos){
+      this.numOfTurns = 0;
+      this.isNewGame = !this.isNewGame;
+      this.playerTookFromCash = 0;
+      this.changeDominos(dominos);
     }
 
     findDominoInPlayerDomino(someDomino){
@@ -77,36 +103,50 @@ class PlayerBox extends Component {
       return null;
     }
     setSelected(selectedDomino){
-      console.log(selectedDomino);
-      console.log(this.state.playerDominos);
-      console.log("In playerBox selectedDomino" + selectedDomino);
       if(selectedDomino!=undefined && this.state.playerDominos.some(domino => DominoUtils.isDominoEqual(domino,selectedDomino))){
-        console.log("Finally");
         let tmp = this.findDominoInPlayerDomino(selectedDomino);
-        console.log("New Selected is "+ tmp);
         this.setState({selectedDomino : tmp});
         this.props.calcPotentialDominos(selectedDomino);
       }
     }
-    
-    
+    setPlayersScore(add,sum){
+      let total = 0;
+      if(add){
+        total = this.state.playerScore + sum;
+      }
+      else{
+        total = this.state.playerScore - sum;
+      }
+      this.setState({playerScore : total});
+    }
+
+    addToNumOfTurns(){
+      this.numOfTurns = this.numOfTurns + 1;
+    }
 
     render() {
-      console.log("player box render");
-      console.log(this.props.validNumbers);
       return (
+        <div className = "playerSide">
         <div className = "playerBox">
             <DominoCash 
-            changeDominos={this.changeDominos.bind(this)} 
+            resetStatAndCangeDominos={this.resetStatAndCangeDominos.bind(this)} 
             getNewDominoFromCash={this.getNewDominoFromCash.bind(this)} 
             newGame = {this.props.newGame}
             numOfTimesPlayerTookFromCash  = {this.props.numOfTimesPlayerTookFromCash}
-            insertDominoToGameBoard = {this.insertDominoToGameBoard.bind(this)}/> 
+            insertDominoToGameBoard = {this.insertDominoToGameBoard.bind(this)} 
+            setPlayersScore = {this.setPlayersScore.bind(this)}/>
+            {this.gameStatus()}
             <DominoPieces 
             dominos = {this.state.playerDominos} 
             selectedDomino = {this.state.selectedDomino} 
             validNumbers = {this.props.validNumbers}
             setSelected ={this.setSelected.bind(this)}/>
+        </div>
+          <Statistics
+            numOfTurns = {this.numOfTurns}
+            isNewGame = {this.isNewGame}
+            playerTookFromCash = {this.playerTookFromCash}
+            playerScore = {this.state.playerScore}/>
         </div>
       );
     }

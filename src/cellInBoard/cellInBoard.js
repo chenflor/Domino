@@ -14,13 +14,13 @@ class CellInBoard extends Component {
 
   render() {
     let DOMINO = null;
+    let classNames = "cellInBoard";
     if (this.props.isDisplayed == true){
-      console.log("cellIN/.." + this.props.isPotential);
       DOMINO = <DominoPiece firstNum = {this.props.firstNum} secondNum = {this.props.secondNum} 
       isHorizontal = {this.props.isHorizontal} isPotential = {this.props.isPotential}/>
     }
     return (
-      <div className = "cellInBoard">
+      <div className = {classNames}>
         {DOMINO}
       </div>
     );
